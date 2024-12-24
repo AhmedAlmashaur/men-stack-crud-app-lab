@@ -1,60 +1,46 @@
-/*------------------- Imports/Initialization ---------------------*/
-const express = require('express');
-const mongoose = require('mongoose');
-const morgan = require('morgan');
-require('dotenv').config();
+/*------------------- Server initialization ---------------------*/
+var express = require('express');
+var app = express();
 
-/*------------------- Middlewear ---------------------*/
-const app = express();
+
+/*------------------- Configuration ---------------------*/
+// Morgan
+var morgan = require('morgan');
 app.use(morgan('dev'));
 
-/*------------------- MongoDB connection ---------------------*/
+// set the view engine to ejs
+app.set('view engine', 'ejs');
+
+// mongoose connection
+const dotenv = require('dotenv');
+dotenv.config();
+
+var mongoose = require('mongoose');
+//connect to our database
 const connect = async () => {
-    // Connect to MongoDB using the MONGODB_URI specified in our .env file.
-    await mongoose.connect(process.env.MONGO_URL);
-  
-    // Call the runQueries function, which will eventually hold functions to work
-    // with data in our db.
-    await runQueries()
-  
-    // Disconnect our app from MongoDB after our queries run.
-    await mongoose.disconnect();
-  
-    // Close our app, bringing us back to the command line.
-    process.exit();
-  };
-  
-  connect()
-
-/*------------------- Model imports ---------------------*/
-
+  await mongoose.connect(process.env.MONGO_URL);
+  console.log('database...connected');
+};
+connect();
 
 
 /*------------------- Routes ---------------------*/
+// use res.render to load up an ejs view file
 
 
 
-/*------------------- GET routes ---------------------*/
+
+/*------------------- CRUD elements ---------------------*/
+
+// GET routes
+
+// POST routes
+
+// PUT routes
+
+// DELETE routes
 
 
-
-/*------------------- POST routes ---------------------*/
-
-
-
-/*------------------- PUT routes ---------------------*/
-
-
-
-/*------------------- DELETE routes ---------------------*/
-
-
-
-/*------------------- Listener ---------------------*/
-
-
-
-/*------------------- Run server ---------------------*/
-const runQueries = async () => {
-    console.log('Running.')
-  };
+/*------------------- Server initialization ---------------------*/
+app.listen(3000);
+console.log('Running...');
